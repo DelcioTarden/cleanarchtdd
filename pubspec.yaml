@@ -13,7 +13,7 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: 1.0.2
-  dartz: ^0.10.1
+  dartz: 0.10.1
   dio: 5.1.2
   equatable: 2.0.5
   font_awesome_flutter: 10.4.0
