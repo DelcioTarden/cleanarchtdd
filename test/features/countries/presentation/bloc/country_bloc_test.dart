@@ -1,7 +1,19 @@
+import 'package:cleanarchtdd/features/countries/data/repositories/country_repository_mock.dart';
+import 'package:cleanarchtdd/features/countries/presentation/bloc/country_bloc.dart';
 import 'package:test/test.dart';
 
 void main() {
-  test('should retrieve countries and capitals', () {
-    
+  test('should retrieve countries and capitals', () async {
+    final CountryBloc countryBloc = CountryBloc(CountryRepositoryMock());
+    final result = await countryBloc.getCountries();
+    result.fold(
+      (exception) {},
+      (countries) {
+        expect(countries.data, isNotEmpty);
+        expect(countries.error, false);
+        expect(countries.msg, "countries and capitals retrieved");
+      }
+    );  
+    countryBloc.dispose();
   });
 }
