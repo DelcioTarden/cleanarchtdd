@@ -20,9 +20,9 @@ class CountryListTileWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _buildInsideRow(TextUtil.countrieText, countryListModel.name, TextUtil.iso2Text, countryListModel.iso2),
+          _buildInsideRow(TextUtil.countrieText, countryListModel.name ?? "", TextUtil.iso2Text, countryListModel.iso2 ?? ""),
           const SizedBox(height: 8,),
-          _buildInsideRow(TextUtil.capitalText, countryListModel.capital, TextUtil.iso3Text, countryListModel.iso3),
+          _buildInsideRow(TextUtil.capitalText, countryListModel.capital ?? "", TextUtil.iso3Text, countryListModel.iso3 ?? ""),
         
         ],
       ),

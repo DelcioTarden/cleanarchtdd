@@ -1,16 +1,16 @@
 import '../../../../core/models/base_model.dart';
 
 class CountryListModel implements Model {
-  String name;
-  String capital;
-  String iso2;
-  String iso3;
+  String? name;
+  String? capital;
+  String? iso2;
+  String? iso3;
 
   CountryListModel({
-    required this.name,
-    required this.capital,
-    required this.iso2,
-    required this.iso3,
+    this.name,
+    this.capital,
+    this.iso2,
+    this.iso3,
   });
 
   @override

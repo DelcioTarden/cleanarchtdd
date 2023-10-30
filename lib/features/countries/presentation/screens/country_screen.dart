@@ -1,4 +1,4 @@
-import 'package:cleanarchtdd/features/countries/data/repositories/country_repository.dart';
+import '../../data/repositories/country_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -22,7 +22,7 @@ class _CountryScreenState extends State<CountryScreen> {
   Widget build(BuildContext context) {
     return Provider<CountryBloc>(
       create:(_){
-        return CountryBloc(CountryRepository(), context);
+        return CountryBloc(CountryRepository(),context: context);
       },
       dispose:(_, value){
         value.dispose();
