@@ -1,11 +1,11 @@
 # CleanArchTdd
 
-CleanArchTdd application developed under the Flutter framework and Dart programming language for clean architecture and TDD testing purposes.
+CleanArchTdd: application developed under the Flutter framework and Dart programming language for testing purposes of clean architecture and Test Driven Development.
 
 ## Project Structure
 
-With the aim of organizing and composing responsibilities for each repository, the project
-It is structured using MVC design pattern and clean architecture folder structure concepts as follows:
+With the aim of organizing and composing responsibilities for each feature, the project
+is structured using Clean Architecture folder structure, Clean Code and SOLID Principal concepts.
 
 
 ## Settings
