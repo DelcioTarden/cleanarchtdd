@@ -7,7 +7,7 @@ import '../../../../core/widgets/body_msg_widget.dart';
 import '../../../../core/widgets/progress_indicator_widget.dart';
 import '../../data/models/country_list_model.dart';
 import '../bloc/country_bloc.dart';
-import '../widgets/countrie_list_tile_widget.dart';
+import '../widgets/country_list_tile_widget.dart';
 import '../widgets/get_countries_button_widget.dart';
 
 class CountryScreen extends StatefulWidget {
