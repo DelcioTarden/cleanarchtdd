@@ -4,7 +4,7 @@ import 'package:cleanarchtdd/core/Enum/enum_language.dart';
 class TextUtil {
   
   static String get countrieText {
-    return _getTranslatedText('Countrie', 'País', 'País', 'Pays');
+    return _getTranslatedText('Country', 'País', 'País', 'Pays');
   }
   static String get notFoundText {
     return _getTranslatedText('Not Found', 'Não Encontrado', 'No Encontrada', 'Pas Trouvé');
