@@ -17,9 +17,7 @@ class CountryRepository extends BaseService implements ICountryRepository {
       return Right(CountryModel.fromMap(response.data));
     } on ExceptionModel catch (e) {
       return Left(e);
-    } catch (e) {
-      //print(e);
-    }
+    } catch (_) {}
     return Left(exceptionModel);
   }
     

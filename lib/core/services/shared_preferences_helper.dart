@@ -9,9 +9,7 @@ class SharedPreferencesHelper {
     try {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       return await prefs.setString(nameKey, value);
-    } catch (e) {
-      //print(e);
-    }
+    } catch (_) {}
     return false;
   }
 
@@ -25,9 +23,7 @@ class SharedPreferencesHelper {
     try {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       return await prefs.remove(nameKey);
-    } catch (e) {
-      //print(e);
-    }
+    } catch (_) {}
     return false;
   }
   
