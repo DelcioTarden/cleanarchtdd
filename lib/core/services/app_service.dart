@@ -106,7 +106,7 @@ class AppService {
 
   bool get isModoRelease { return kReleaseMode; }
 
-  /// INFORMACAO DO APP
+  /// APP INFORMATION
   Future<String> getAppName() async {
     final packageInfo = await PackageInfo.fromPlatform();
     return packageInfo.appName;

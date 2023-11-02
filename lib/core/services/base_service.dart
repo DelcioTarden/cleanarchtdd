@@ -16,7 +16,7 @@ class BaseService {
         }
       }
       throw ExceptionModel(codigo: e.codigo, msg: _normalizeMsg(e.msg.toString()));
-    } catch (e) {
+    } catch (_) {
       return null;
     }
   }
@@ -33,7 +33,7 @@ class BaseService {
       }
       throw ExceptionModel(codigo: e.codigo, msg: _normalizeMsg(e.msg.toString()));
 
-    } catch (e) {
+    } catch (_) {
       return null;
     }
   }
@@ -43,7 +43,7 @@ class BaseService {
       return await HttpClient.instance.delete(url: url.toString(), showServerError: showServerError,data: data);
     } on ExceptionModel catch (e){
       throw ExceptionModel(codigo: e.codigo, msg: _normalizeMsg(e.msg.toString()));
-    } catch (e) {
+    } catch (_) {
       return null;
     }
   }
@@ -58,7 +58,7 @@ class BaseService {
         }
       }
       throw ExceptionModel(codigo: e.codigo, msg: _normalizeMsg(e.msg.toString()));
-    } catch (e) {
+    } catch (_) {
       return null;
     }
   }
@@ -73,7 +73,7 @@ class BaseService {
       //   final result = await UserService.instance.authUser(user.usuario, user.senha, true);
       //   return result;
       // }
-    } catch (e) {
+    } catch (_) {
       //
     }
     return false;
