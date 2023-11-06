@@ -1,3 +1,4 @@
+import 'package:cleanarchtdd/core/utils/show_top_snack_bar_helper.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/utils/text_util.dart';
@@ -39,7 +40,15 @@ class GetCountriesButtonWidget extends StatelessWidget {
   }
 
   void _getCountries(BuildContext context) async {
-    await countryBloc.getCountries();
+    final result = await countryBloc.getCountries();
+    result.fold(
+      (exception) {
+        ShowTopSnackBarHelper.showCustomTopSnackBar(3, exception.msg ?? TextUtil.connectionErrorText, context);
+      },
+      (countries) {
+        if(countries.error == true) ShowTopSnackBarHelper.showCustomTopSnackBar(3, TextUtil.noCountrieFoundText, context);
+      }
+    );
   }
   
 }

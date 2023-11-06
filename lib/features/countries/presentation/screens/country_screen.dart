@@ -1,4 +1,3 @@
-import '../../data/repositories/country_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -6,6 +5,7 @@ import '../../../../core/utils/text_util.dart';
 import '../../../../core/widgets/body_msg_widget.dart';
 import '../../../../core/widgets/progress_indicator_widget.dart';
 import '../../data/models/country_list_model.dart';
+import '../../data/repositories/country_repository.dart';
 import '../bloc/country_bloc.dart';
 import '../widgets/country_list_tile_widget.dart';
 import '../widgets/get_countries_button_widget.dart';
@@ -22,7 +22,7 @@ class _CountryScreenState extends State<CountryScreen> {
   Widget build(BuildContext context) {
     return Provider<CountryBloc>(
       create:(_){
-        return CountryBloc(CountryRepository(),context: context);
+        return CountryBloc(CountryRepository());
       },
       dispose:(_, value){
         value.dispose();

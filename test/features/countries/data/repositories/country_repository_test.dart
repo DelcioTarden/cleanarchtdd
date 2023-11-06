@@ -2,27 +2,24 @@ import 'package:cleanarchtdd/core/models/exception_model.dart';
 import 'package:cleanarchtdd/features/countries/data/models/country_model.dart';
 import 'package:cleanarchtdd/features/countries/data/repositories/country_repository.dart';
 import 'package:cleanarchtdd/features/countries/data/repositories/country_repository_mock.dart';
-import 'package:cleanarchtdd/features/countries/presentation/bloc/country_bloc.dart';
 import 'package:test/test.dart';
 
 void main() {
-  late CountryBloc countryBloc;
+  late CountryRepository countryRepository;
+  late CountryRepositoryMock countryRepositoryMock;
   setUpAll(() {
-    countryBloc = CountryBloc(CountryRepositoryMock());
+    countryRepository = CountryRepository();
+    countryRepositoryMock = CountryRepositoryMock();
   },);
 
-  tearDownAll(() {
-    countryBloc.dispose();
-  });
-
   test('Offline: should retrieve countries and capitals', () async {
-    final result = await countryBloc.getCountries();
+    final result = await countryRepositoryMock.getCountries();
     result.fold(
       (exception) {
       },
       (countries) {
         expect(countries, isA<CountryModel>());
-        expect(countries.data.isNotEmpty, equals(true));
+        expect(countries.data!.isNotEmpty, equals(true));
         expect(countries.error, equals(false));
         expect(countries.msg, equals("countries and capitals retrieved"));
       }
@@ -30,16 +27,15 @@ void main() {
   }, tags: "offline");
 
   test('Online: should retrieve countries and capitals', () async {
-    countryBloc = CountryBloc(CountryRepository());
-    final result = await countryBloc.getCountries();
+    final result = await countryRepository.getCountries();
     result.fold(
       (exception) {
         expect(exception, isA<ExceptionModel>());
-        expect(exception.msg.isNotEmpty, true);
+        expect(exception.msg!.isNotEmpty, true);
       },
       (countries) {
         expect(countries, isA<CountryModel>());
-        expect(countries.data.isNotEmpty, equals(true));
+        expect(countries.data!.isNotEmpty, equals(true));
         expect(countries.error, equals(false));
         expect(countries.msg, equals("countries and capitals retrieved"));
       }

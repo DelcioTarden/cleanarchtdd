@@ -15,7 +15,7 @@ class BaseService {
           return await get(url: url, showServerError: showServerError, isTokenRetrieve: false);
         }
       }
-      throw ExceptionModel(codigo: e.codigo, msg: _normalizeMsg(e.msg.toString()));
+      throw ExceptionModel(codigo: e.codigo ?? 0, msg: _normalizeMsg(e.msg.toString()));
     } catch (_) {
       return null;
     }
