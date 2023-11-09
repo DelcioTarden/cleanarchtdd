@@ -1,12 +1,11 @@
 import 'dart:io';
 
+import 'package:cleanarchtdd/core/Screens/splash_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:package_info/package_info.dart';
-
-import '../../features/countries/presentation/screens/country_screen.dart';
 
 class AppService {
   static final AppService _service = AppService._internal();
@@ -17,7 +16,7 @@ class AppService {
     if (sairDoApp && Platform.isAndroid){
       SystemNavigator.pop();
     } else {
-      navigatePushAndRemoveUntil( const CountryScreen());
+      navigatePushAndRemoveUntil( const SplashScreen());
     }
   }
 
