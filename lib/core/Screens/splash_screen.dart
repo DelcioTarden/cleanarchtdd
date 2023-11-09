@@ -1,3 +1,6 @@
+import 'package:cleanarchtdd/core/bloc/bloc_provider.dart';
+import 'package:cleanarchtdd/features/countries/data/repositories/country_repository.dart';
+import 'package:cleanarchtdd/features/countries/presentation/bloc/country_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -57,7 +60,8 @@ class SplashScreen extends StatelessWidget {
   }
 
   void _splashScreenCounter() async {
+    final CountryBloc countryBloc = CountryBloc(CountryRepository());
     await Future.delayed(const Duration(milliseconds: 3000));
-    AppService.instance.navigateFromLogin(const CountryScreen());
+    AppService.instance.navigateFromLogin(BlocProvider(bloc: countryBloc, child: CountryScreen(countryBloc: countryBloc)));
   }
 }
