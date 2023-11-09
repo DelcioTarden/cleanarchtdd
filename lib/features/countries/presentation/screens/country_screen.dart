@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import '../../../../core/utils/text_util.dart';
 import '../../../../core/widgets/body_msg_widget.dart';
 import '../../../../core/widgets/progress_indicator_widget.dart';
 import '../../data/models/country_list_model.dart';
-import '../../data/repositories/country_repository.dart';
 import '../bloc/country_bloc.dart';
 import '../widgets/country_list_tile_widget.dart';
 import '../widgets/get_countries_button_widget.dart';
 
 class CountryScreen extends StatefulWidget {
-  const CountryScreen({super.key});
+  final CountryBloc countryBloc;
+  const CountryScreen({required this.countryBloc, super.key});
 
   @override
   State<CountryScreen> createState() => _CountryScreenState();
@@ -20,22 +19,10 @@ class CountryScreen extends StatefulWidget {
 class _CountryScreenState extends State<CountryScreen> {
   @override
   Widget build(BuildContext context) {
-    return Provider<CountryBloc>(
-      create:(_){
-        return CountryBloc(CountryRepository());
-      },
-      dispose:(_, value){
-        value.dispose();
-      },
-      child: Consumer<CountryBloc>(
-        builder: (_,countryBloc, __){
-          return Scaffold(
-            resizeToAvoidBottomInset: false,
-            appBar: _appBar(),
-            body: _buildBody(countryBloc),
-          );
-        }
-      ),
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      appBar: _appBar(),
+      body: _buildBody(),
     );
   }
 
@@ -51,7 +38,7 @@ class _CountryScreenState extends State<CountryScreen> {
     );
   }
 
-  Widget _buildBody(CountryBloc countryBloc) {
+  Widget _buildBody() {
     return LayoutBuilder(
       builder: (_, constraints) {
         return Padding(
@@ -60,17 +47,17 @@ class _CountryScreenState extends State<CountryScreen> {
             physics: const BouncingScrollPhysics(),
             headerSliverBuilder: (_, __) {
               return <Widget>[
-                _buildSliverAppBar(countryBloc),
+                _buildSliverAppBar(),
               ];
             },
-            body: _buildListViewCountries(countryBloc),
+            body: _buildListViewCountries(),
           ),
         );
       }
     );
   }
 
-  Widget _buildSliverAppBar(CountryBloc countryBloc){
+  Widget _buildSliverAppBar(){
     return SliverAppBar(
       backgroundColor: Colors.white,
       leading: const SizedBox.shrink(),
@@ -82,18 +69,18 @@ class _CountryScreenState extends State<CountryScreen> {
       pinned: false,
       flexibleSpace: FlexibleSpaceBar(
         collapseMode: CollapseMode.parallax,
-        background: GetCountriesButtonWidget(countryBloc, context),
+        background: GetCountriesButtonWidget(widget.countryBloc, context),
       ),
     );
   }
 
-  Widget _buildListViewCountries(CountryBloc countryBloc) {
+  Widget _buildListViewCountries() {
     return StreamBuilder<bool>(
-      stream: countryBloc.streamProcessing,
+      stream: widget.countryBloc.streamProcessing,
       builder: (context, snapProcessing) {
         final bool processing = snapProcessing.data ?? false;
         return !processing ? StreamBuilder<List<CountryListModel>>(
-          stream: countryBloc.streamCountryList,
+          stream: widget.countryBloc.streamCountryList,
           builder: (context, snapCountrieList) {
             var countryList = snapCountrieList.data ?? [];
             if(countryList.isNotEmpty) {
