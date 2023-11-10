@@ -60,8 +60,7 @@ class SplashScreen extends StatelessWidget {
   }
 
   void _splashScreenCounter() async {
-    final CountryBloc countryBloc = CountryBloc(CountryRepository());
     await Future.delayed(const Duration(milliseconds: 3000));
-    AppService.instance.navigateFromLogin(BlocProvider(bloc: countryBloc, child: CountryScreen(countryBloc: countryBloc)));
+    AppService.instance.navigatePushReplecementTo(BlocProvider(bloc: CountryBloc(CountryRepository()), child: CountryScreen(countryBloc: CountryBloc(CountryRepository()))), animated: true);
   }
 }
