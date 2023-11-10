@@ -6,10 +6,12 @@ import 'package:cleanarchtdd/features/countries/presentation/bloc/country_bloc.d
 import 'package:cleanarchtdd/features/countries/presentation/screens/country_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:integration_test/integration_test.dart';
 
 void main() {
   late CountryBloc countryBloc;
   setUpAll(() {
+    IntegrationTestWidgetsFlutterBinding.ensureInitialized();
     countryBloc = CountryBloc(CountryRepositoryMock());
   },);
 
@@ -17,7 +19,7 @@ void main() {
     countryBloc.dispose();
   });
 
-  testWidgets("Offline: Check all country_screen states", (widgetTester) async {
+  testWidgets("Offline: Check all country_screen states", (WidgetTester widgetTester) async {
     await widgetTester.pumpWidget(MaterialApp(home: BlocProvider(bloc: countryBloc, child: CountryScreen(countryBloc: countryBloc)),));
     final countryButton = find.byType(ElevatedButton);
     final progressIndicator = find.byType(ProgressIndicatorWidget);
