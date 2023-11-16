@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../core/utils/text_util.dart';
 import '../../../../core/widgets/body_msg_widget.dart';
@@ -22,7 +23,19 @@ class _CountryScreenState extends State<CountryScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: _appBar(),
-      body: _buildBody(),
+      body: Provider<CountryBloc>(
+        create:(_){
+          return widget.countryBloc;
+        },
+        dispose:(_, value){
+          value.dispose();
+        },
+        child: Consumer<CountryBloc>(
+          builder: (_,countryBloc, __){
+            return _buildBody();
+          }
+        ),
+      ),
     );
   }
 
