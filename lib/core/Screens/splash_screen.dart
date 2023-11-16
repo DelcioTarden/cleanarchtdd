@@ -1,16 +1,34 @@
-import 'package:cleanarchtdd/core/bloc/bloc_provider.dart';
 import 'package:cleanarchtdd/features/countries/data/repositories/country_repository.dart';
 import 'package:cleanarchtdd/features/countries/presentation/bloc/country_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../features/countries/presentation/screens/country_screen.dart';
 import '../services/app_service.dart';
 import '../utils/theme_helper_util.dart';
 
-class SplashScreen extends StatelessWidget {
+class SplashScreen extends StatefulWidget {
 
   const SplashScreen({super.key});
+
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
+    _splashScreenCounter();
+  }
+
+  @override
+  void dispose() {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: SystemUiOverlay.values);
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,15 +42,13 @@ class SplashScreen extends StatelessWidget {
   }
 
   Widget _buildBackground(BuildContext context) {
-    _splashScreenCounter();
     return Container(
       decoration: BoxDecoration(
-        image: DecorationImage(
-          fit: BoxFit.fitHeight,
-          alignment: const Alignment(-1.0, 0),
-          colorFilter: ColorFilter.mode(Colors.white.withOpacity(1), BlendMode.dstOver),
-          image: const AssetImage("assets/self-brancal-sem-fundo.png"),
-        )
+        gradient: LinearGradient(
+          colors: [Colors.white, Colors.blue.shade100],
+          begin: Alignment.topRight,
+          end: Alignment.bottomLeft,
+        ),
       ),
       child: _buildLogo(context),
     );
@@ -60,8 +76,7 @@ class SplashScreen extends StatelessWidget {
   }
 
   void _splashScreenCounter() async {
-    final countryBloc = CountryBloc(CountryRepository());
     await Future.delayed(const Duration(milliseconds: 3000));
-    AppService.instance.navigatePushReplecementTo(BlocProvider(bloc: countryBloc, child: CountryScreen(countryBloc: countryBloc)), animated: true);
+    AppService.instance.navigatePushReplecementTo(CountryScreen(countryBloc: CountryBloc(CountryRepository())), animated: true);
   }
 }
