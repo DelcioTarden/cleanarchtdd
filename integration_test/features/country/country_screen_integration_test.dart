@@ -1,4 +1,3 @@
-import 'package:cleanarchtdd/core/bloc/bloc_provider.dart';
 import 'package:cleanarchtdd/core/widgets/body_msg_widget.dart';
 import 'package:cleanarchtdd/core/widgets/progress_indicator_widget.dart';
 import 'package:cleanarchtdd/features/countries/data/repositories/country_repository_mock.dart';
@@ -20,7 +19,7 @@ void main() {
   });
 
   testWidgets("Offline: Check all country_screen states", (WidgetTester widgetTester) async {
-    await widgetTester.pumpWidget(MaterialApp(home: BlocProvider(bloc: countryBloc, child: CountryScreen(countryBloc: countryBloc)),));
+    await widgetTester.pumpWidget(MaterialApp(home: CountryScreen(countryBloc: countryBloc)),);
     final countryButton = find.byType(ElevatedButton);
     final progressIndicator = find.byType(ProgressIndicatorWidget);
     final countryList = find.byType(ListView);
